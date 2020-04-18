@@ -55,15 +55,10 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerMovment()
     {
-        //objectController.SetHorizontalVelocity(InputController.HorizontalMovement * speed);
-        //if(InputController.Jump)
-        //{
-        //    objectController.SetVerticalVelocity(speed);
-        //}
-
-        if (Input.GetMouseButton(0))
+        objectController.SetHorizontalVelocity(InputController.HorizontalMovement * speed);
+        if (InputController.Jump)
         {
-            LookAtPosition(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            objectController.SetVerticalVelocity(speed);
         }
     }
     void Update()
@@ -73,7 +68,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        Debug.Log("Trigger Collision");
         if (InputController.Interact)
         {
             IInteractable interactable = collision.GetComponent<IInteractable>();
@@ -81,6 +75,14 @@ public class PlayerController : MonoBehaviour
             {
                 interactable.Interact();
             }
+        }
+    }
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        IEnemy enemy = collision.collider.GetComponent<IEnemy>();
+        if (enemy != null)
+        {
+            enemy.OnEnemyTouch();
         }
     }
 }
