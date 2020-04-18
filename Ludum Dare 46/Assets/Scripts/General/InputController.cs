@@ -43,6 +43,7 @@ public class InputController : MonoBehaviour
     private void Update()
     {
         GetHorizontalMovementInput();
+        GetVerticalMovementInput();
         GetJumpInput();
         GetInteractInput();
         GetShootInput();
