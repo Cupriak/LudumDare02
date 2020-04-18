@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
     }
 
-    void LookAtPosition(Vector3 position)
+    private void LookAtPosition(Vector3 position)
     {
         Vector2 vector = position - transform.position;
 
