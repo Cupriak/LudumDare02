@@ -19,13 +19,13 @@ public class RightLeftEnemy : MonoBehaviour, IEnemy
 
     public void MainAI()
     {
-        if (transform.position.x >= rightBound.position.x)
+        if (transform.position.x > rightBound.position.x)
         {
-            movingSide = -movingSide;
+            movingSide = -1;
         }
-        if (transform.position.x <= leftBound.position.x)
+        if (transform.position.x < leftBound.position.x)
         {
-            movingSide = -movingSide;
+            movingSide = 1;
         }
         objectController.SetHorizontalVelocity(speed * movingSide);
     }

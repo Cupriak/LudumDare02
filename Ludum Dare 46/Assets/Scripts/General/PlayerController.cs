@@ -55,10 +55,22 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerMovment()
     {
+        //Debug.Log(InputController.HorizontalMovement);
+        //Debug.Log(InputController.Jump);
+
         objectController.SetHorizontalVelocity(InputController.HorizontalMovement * speed);
         if (InputController.Jump)
         {
             objectController.SetVerticalVelocity(speed);
+        }
+        if(Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            Debug.Log("Timer started");
+            GetComponent<Timer>().StartTimer(2f);
+        }
+        if(GetComponent<Timer>().TimeElapsed)
+        {
+            Debug.Log("TIME ELAPSED");
         }
     }
     void Update()
