@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     private ObjectController2D objectController;
     private SpriteRenderer sprite;
     public float speed = 5f;
+    public float speedOnPlatform = 0.1f;
     void Start()
     {
         objectController = GetComponent<ObjectController2D>();
@@ -57,20 +58,32 @@ public class PlayerController : MonoBehaviour
     {
         //Debug.Log(InputController.HorizontalMovement);
         //Debug.Log(InputController.Jump);
+        //if (transform.parent != null)
+        //{
+        //    Debug.Log("mam parenta");
+        //    float velocity = GetComponentInParent<Rigidbody2D>().velocity.x + InputController.HorizontalMovement * speedOnPlatform;
+        //    //float maxSpeed = speed;
+        //    //float minSpeed = speed;
+        //    //if(GetComponent<Rigidbody2D>().velocity.x >= 0)
+        //    //{
+        //    //    maxSpeed = GetComponentInParent<Rigidbody2D>().velocity.x + speed;
+        //    //}
+        //    //else
+        //    //{
 
+        //    //}
+        //    //float velocity = GetComponent<Rigidbody2D>().velocity.x + InputController.HorizontalMovement * speed;
+        //    objectController.SetHorizontalVelocity(velocity);
+        //}
+        //else
+        //{
+        //    Debug.Log("NIE mam parenta");
+        //    objectController.SetHorizontalVelocity(InputController.HorizontalMovement * speed);
+        //}
         objectController.SetHorizontalVelocity(InputController.HorizontalMovement * speed);
         if (InputController.Jump)
         {
             objectController.SetVerticalVelocity(speed);
-        }
-        if(Input.GetKeyDown(KeyCode.Alpha0))
-        {
-            Debug.Log("Timer started");
-            GetComponent<Timer>().StartTimer(2f);
-        }
-        if(GetComponent<Timer>().TimeElapsed)
-        {
-            Debug.Log("TIME ELAPSED");
         }
     }
     void Update()
@@ -95,6 +108,25 @@ public class PlayerController : MonoBehaviour
         if (enemy != null)
         {
             enemy.OnEnemyTouch();
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        IPickable pickable = collision.collider.GetComponent<IPickable>();
+        if (pickable != null)
+        {
+            //pickable.OnTouch(gameObject);
+            transform.SetParent(collision.transform);
+        }
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        IPickable pickable = collision.collider.GetComponent<IPickable>();
+        if (pickable != null)
+        {
+            //pickable.OnLeft(gameObject);
+            transform.SetParent(null);
         }
     }
 }
