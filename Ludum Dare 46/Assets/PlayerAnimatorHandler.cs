@@ -18,7 +18,7 @@ public class PlayerAnimatorHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        animator.SetFloat("isWalking", InputController.HorizontalMovement);
+        animator.SetFloat("isWalking", Mathf.Abs(InputController.HorizontalMovement));
         animator.SetBool("wantToJump", InputController.Jump);
         animator.SetBool("isGrounded", characterController2D.m_Grounded);
     }
