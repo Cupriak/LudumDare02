@@ -15,13 +15,10 @@ public class MovingPlatform : MonoBehaviour, IPickable
     {
         target.transform.SetParent(null);
     }
-
     public void OnTouch(GameObject target)
     {
         target.transform.SetParent(transform);
     }
-
-    // Update is called once per frame
     void Update()
     {
         if (transform.position.x > rightBound.position.x)

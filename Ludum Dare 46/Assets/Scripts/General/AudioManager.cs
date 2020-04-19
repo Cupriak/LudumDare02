@@ -4,13 +4,25 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-
+    private static AudioManager singleton;
+    public static AudioManager GetInstance()
+    {
+        if(singleton != null)
+        {
+            return singleton;
+        }
+        else
+        {
+            throw new Exception("Failed to get AudioManager instande");
+        }
+    }
     public Sound[] sounds;
 
     private void Awake()
     {
         SetSounds();
         Play("LevelTheme");
+        singleton = this;
     }
     private void SetSounds()
     {

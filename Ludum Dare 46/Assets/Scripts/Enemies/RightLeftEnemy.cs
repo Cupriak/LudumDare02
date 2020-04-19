@@ -30,7 +30,7 @@ public class RightLeftEnemy : MonoBehaviour, IEnemy
         objectController.SetHorizontalVelocity(speed * movingSide);
     }
 
-    public void OnEnemyTouch()
+    public void OnEnemyTouch(GameObject target)
     {
         Debug.Log("Enemy was touched");
     }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DebugInteractable : MonoBehaviour, IInteractable
 {
-    void IInteractable.Interact()
+    public void Interact(GameObject target)
     {
         Debug.Log("Interaction");
     }

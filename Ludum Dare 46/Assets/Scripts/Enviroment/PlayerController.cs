@@ -98,7 +98,7 @@ public class PlayerController : MonoBehaviour
             IInteractable interactable = collision.GetComponent<IInteractable>();
             if (interactable != null)
             {
-                interactable.Interact();
+                interactable.Interact(gameObject);
             }
         }
     }
@@ -107,7 +107,7 @@ public class PlayerController : MonoBehaviour
         IEnemy enemy = collision.collider.GetComponent<IEnemy>();
         if (enemy != null)
         {
-            enemy.OnEnemyTouch();
+            enemy.OnEnemyTouch(gameObject);
         }
     }
 
@@ -116,8 +116,7 @@ public class PlayerController : MonoBehaviour
         IPickable pickable = collision.collider.GetComponent<IPickable>();
         if (pickable != null)
         {
-            //pickable.OnTouch(gameObject);
-            transform.SetParent(collision.transform);
+            pickable.OnTouch(gameObject);
         }
     }
     private void OnCollisionExit2D(Collision2D collision)
@@ -125,8 +124,7 @@ public class PlayerController : MonoBehaviour
         IPickable pickable = collision.collider.GetComponent<IPickable>();
         if (pickable != null)
         {
-            //pickable.OnLeft(gameObject);
-            transform.SetParent(null);
+            pickable.OnLeft(gameObject);
         }
     }
 }
