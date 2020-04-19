@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RightLeftEnemy : MonoBehaviour, IEnemy
+public class RightLeftEnemy : MonoBehaviour, IEnemy, IDamagable
 {
     public int health = 3;
     public float speed = 3f;
@@ -42,5 +42,10 @@ public class RightLeftEnemy : MonoBehaviour, IEnemy
             Die();
         }
         MainAI();
+    }
+
+    public void GetDamage(GameObject target)
+    {
+        health -= 1;
     }
 }

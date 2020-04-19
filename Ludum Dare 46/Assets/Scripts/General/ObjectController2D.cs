@@ -39,6 +39,10 @@ public class ObjectController2D : MonoBehaviour
     {
         rb2d.velocity = new Vector2(rb2d.velocity.x, speed);
     }
+    public void SetVelocityInDirection(Vector3 direction, float speed)
+    {
+        rb2d.velocity = direction.normalized * speed;
+    }
     public void SetRotation(float angle)
     {
         transform.eulerAngles = new Vector3(0, 0, angle);
