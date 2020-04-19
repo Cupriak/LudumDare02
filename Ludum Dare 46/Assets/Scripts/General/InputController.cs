@@ -11,7 +11,7 @@ public class InputController : MonoBehaviour
     public static bool Shoot { get; private set; }
     public static bool Menu { get; private set; }
     public static bool Pause { get; private set; }
-
+    public static bool MenuFreeze { get; private set; }
     private void GetHorizontalMovementInput()
     {
         HorizontalMovement = Input.GetAxisRaw("Horizontal");
@@ -40,6 +40,10 @@ public class InputController : MonoBehaviour
     {
         Pause = Input.GetButtonDown("Pause");
     }
+    private void GetMenuFreeze()
+    {
+        MenuFreeze = UIController.GetInstance().menuUI.activeSelf ? true : false;
+    }
     private void Update()
     {
         GetHorizontalMovementInput();
@@ -49,5 +53,6 @@ public class InputController : MonoBehaviour
         GetShootInput();
         GetMenuInput();
         GetPauseInput();
+        GetMenuFreeze();
     }
 }
