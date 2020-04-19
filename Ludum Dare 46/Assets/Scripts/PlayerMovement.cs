@@ -25,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         horizontalMove = InputController.HorizontalMovement * runSpeed;
+        animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
 
         if (InputController.Jump)
         {  
