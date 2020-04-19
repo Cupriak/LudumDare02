@@ -5,26 +5,32 @@ using UnityEngine;
 public class Shooting : MonoBehaviour
 {
 
-    public GameObject arm;
+    public GameObject armL;
+    public GameObject armR;
     public float vector2;
-    public SpriteRenderer sprite;
+    public SpriteRenderer spriteL;
+    public SpriteRenderer spriteR;
 
     private CharacterController2D characterController2D;
 
     // Start is called before the first frame update
     void Start()
     {
-        sprite = arm.GetComponent<SpriteRenderer>();
+        spriteL = armL.GetComponent<SpriteRenderer>();
+        spriteR = armR.GetComponent<SpriteRenderer>();
+
         characterController2D = GetComponent<CharacterController2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        LookAtPosition(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+        LookAtPosition(Camera.main.ScreenToWorldPoint(Input.mousePosition),spriteL);
+        LookAtPosition(Camera.main.ScreenToWorldPoint(Input.mousePosition), spriteR);
+
     }
 
-    private void LookAtPosition(Vector3 position)
+    private void LookAtPosition(Vector3 position, SpriteRenderer sprite)
     {
         Vector2 vector = position - transform.position;
 
@@ -61,6 +67,8 @@ public class Shooting : MonoBehaviour
             sprite.flipY = true;
         }
 
-        characterController2D.SetRotation(angle,arm);
+        characterController2D.SetRotation(angle, armL);
+        characterController2D.SetRotation(angle, armR);
+
     }
 }
